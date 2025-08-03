@@ -66,5 +66,6 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
     },
-    "dotnet.defaultSolution": "ZeroContact.sln"
+    "dotnet.defaultSolution": "ZeroContact.sln",
+    "dotnet.preferCSharpExtension": true
 }

@@ -1,16 +1,27 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float walkSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 movement;
+    public bool IsMoving { get; private set; }
 
-    void Start()
+    public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    // Called before fist frame update
+    void Start()
+    {
+
+    }
+
+    // Called every frame
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -19,6 +30,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(movement.x * walkSpeed, movement.y * walkSpeed);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        movement = context.ReadValue<Vector2>();
+
+        IsMoving = movement != Vector2.zero;
     }
 }
