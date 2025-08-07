@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(movement.x * walkSpeed, movement.y * walkSpeed);
+        rb.linearVelocity = new Vector2(movement.x * walkSpeed, rb.linearVelocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
