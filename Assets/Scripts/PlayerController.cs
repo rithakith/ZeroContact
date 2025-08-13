@@ -8,18 +8,19 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
-     private Vector2 movement;
+    private Vector2 movement;
 
-     public float CurrentMoveSpeed
+    public float CurrentMoveSpeed
     {
         get
         {
-            if(IsMoving)
+            if (IsMoving)
             {
                 if (IsRunning)
                 {
                     return runSpeed;
-                } else
+                }
+                else
                 {
                     return walkSpeed;
                 }
@@ -29,10 +30,10 @@ public class PlayerController : MonoBehaviour
                 return 0;
             }
         }
-     }
+    }
     private Rigidbody2D rb;
     Animator animator;
-   
+
 
     [SerializeField]
     private bool _isMoving = false;
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
         private set
         {
             _isMoving = value;
-            animator.SetBool("isMoving", value);
+            animator.SetBool(AnimationStrings.IsMoving, value);
         }
     }
 
@@ -62,8 +63,28 @@ public class PlayerController : MonoBehaviour
         private set
         {
             _isRunning = value;
-            animator.SetBool("isRunning", value);
+            animator.SetBool(AnimationStrings.IsRunning, value);
         }
+    }
+
+    public bool _isFacingRight = true;
+    public bool IsFacingRight
+    {
+        get
+        {
+            return _isFacingRight;
+        }
+        private set
+        {
+            if (_isFacingRight != value)
+            {
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1; // Just flip X sign
+                transform.localScale = localScale;
+            }
+            _isFacingRight = value;
+        }
+
     }
 
     public void Awake()
@@ -81,7 +102,7 @@ public class PlayerController : MonoBehaviour
     // Called every frame
     void Update()
     {
-       
+
     }
 
     void FixedUpdate()
@@ -94,6 +115,20 @@ public class PlayerController : MonoBehaviour
         movement = context.ReadValue<Vector2>();
 
         IsMoving = movement != Vector2.zero;
+
+        SetFacingDirection(movement);
+    }
+
+    private void SetFacingDirection(Vector2 movement)
+    {
+        if (movement.x > 0 && !IsFacingRight)
+        {
+            IsFacingRight = true;
+        }
+        else if (movement.x < 0 && IsFacingRight)
+        {
+            IsFacingRight = false;
+        }
     }
 
     public void OnRun(InputAction.CallbackContext context)
