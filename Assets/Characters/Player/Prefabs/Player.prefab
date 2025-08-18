@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2494705623091628491}
   - component: {fileID: 2902545532610597289}
   - component: {fileID: 6613036175234155671}
+  - component: {fileID: 6355390325003290354}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -159,6 +160,7 @@ MonoBehaviour:
   runSpeed: 8
   airwalkSpeed: 4
   jumpImpulse: 10
+  shieldAnimator: {fileID: 8314377434473311958}
   _isMoving: 0
   _isRunning: 0
   _isFacingRight: 1
@@ -208,7 +210,19 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1528268777895840816}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnShield
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Shield[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -361,6 +375,18 @@ MonoBehaviour:
   _isGrounded: 0
   _isOnWall: 0
   _isOnCeiling: 0
+--- !u!114 &6355390325003290354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031666653799163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca1274c66e96aa48bde1803de47f9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6044800873433915882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,6 +395,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9128063391259512371}
     m_Modifications:
+    - target: {fileID: 805539380309970296, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 805539380309970296, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 805539380309970296, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -413,13 +447,63 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 5186556457313740725, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_Size.x
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186556457313740725, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_Size.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186556457313740725, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b769ec02d561694188873e66470be8b, type: 3}
+    - target: {fileID: 5186556457313740725, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186556457313740725, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2559315460437807654, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8314377434473311958}
   m_SourcePrefab: {fileID: 100100000, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
 --- !u!4 &6399240766124272786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 805539380309970296, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
   m_PrefabInstance: {fileID: 6044800873433915882}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8099708020888466380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2559315460437807654, guid: 4e7cb74c7ef7f044996bb099f9f486ac, type: 3}
+  m_PrefabInstance: {fileID: 6044800873433915882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8314377434473311958
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8099708020888466380}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5091de9e947958e499f4af1b93a72843, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
