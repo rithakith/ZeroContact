@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
-    public float airwalkSpeed = 4f;
+    public float airwalkSpeed = 3f;
     public float jumpImpulse = 10f;
     private Vector2 movement;
 
