@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class VineLadderMovement : MonoBehaviour
 {
     private float vertical;
-    private float speed = 6f;
+    private float speed = 10f;
     private bool isLadder;
     private bool isClimbing;
 
@@ -36,7 +36,7 @@ public class VineLadderMovement : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = 2;
+            rb.gravityScale = 1;
         }
     }
 

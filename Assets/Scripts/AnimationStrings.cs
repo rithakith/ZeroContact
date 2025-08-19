@@ -15,4 +15,5 @@ internal class AnimationStrings
     internal static string IsOnWall = "isOnWall";
     internal static string powerup = "PowerUp";
     internal static string powerdown = "PowerDown";
+    internal static string IsAlive = "isAlive";
 }
