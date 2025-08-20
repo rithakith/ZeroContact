@@ -190,6 +190,16 @@ public class PlayerController : MonoBehaviour
             shieldActive = false;
         }
     }
+
+    public void OnShieldAttack(InputAction.CallbackContext context)
+{
+    if (context.started && shieldActive)
+    {
+        shieldAnimator.SetTrigger(AnimationStrings.attack); 
+        shieldActive = true;
+    }
+}
+
 }
 
     
