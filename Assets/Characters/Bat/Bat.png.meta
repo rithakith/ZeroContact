@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: 2c6f9bb817f098545b66089ad289778d
+guid: a90cb261ffc977a4f8cb586acb9a211a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7050993540882883828
-    second: Idle 1_0
+      213: 8647823593821616703
+    second: Bat_0
   - first:
-      213: 760058600049143939
-    second: Idle 1_1
+      213: 5681806813702538305
+    second: Bat_1
   - first:
-      213: 794771719245926436
-    second: Idle 1_2
+      213: 697682191857345388
+    second: Bat_2
   - first:
-      213: 1063925711475361242
-    second: Idle 1_3
-  - first:
-      213: -1837866293141573617
-    second: Idle 1_4
+      213: 6993031405965254486
+    second: Bat_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -78,16 +75,16 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,10 +107,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle 1_0
+      name: Bat_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1536
+        x: 13
+        y: 18
+        width: 40
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0b1a1a7bb6d52e90800000000000000
-      internalID: -7050993540882883828
+      spriteID: f3abafd8dbd330870800000000000000
+      internalID: 8647823593821616703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle 1_1
+      name: Bat_1
       rect:
         serializedVersion: 2
-        x: 62
-        y: 1353
-        width: 6
-        height: 6
+        x: 77
+        y: 20
+        width: 39
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 380f86015454c8a00800000000000000
-      internalID: 760058600049143939
+      spriteID: 144422d8135d9de40800000000000000
+      internalID: 5681806813702538305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle 1_2
+      name: Bat_2
       rect:
         serializedVersion: 2
-        x: 69
-        y: 1353
-        width: 6
-        height: 6
+        x: 150
+        y: 16
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4201e23faa8970b00800000000000000
-      internalID: 794771719245926436
+      spriteID: c63e5cbc14aaea900800000000000000
+      internalID: 697682191857345388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle 1_3
+      name: Bat_3
       rect:
         serializedVersion: 2
-        x: 902
-        y: 1353
-        width: 6
-        height: 6
+        x: 208
+        y: 19
+        width: 35
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,30 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad5c4e33cc2d3ce00800000000000000
-      internalID: 1063925711475361242
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle 1_4
-      rect:
-        serializedVersion: 2
-        x: 934
-        y: 1353
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f00f1a408569e76e0800000000000000
-      internalID: -1837866293141573617
+      spriteID: 65f95b7530d3c0160800000000000000
+      internalID: 6993031405965254486
       vertices: []
       indices: 
       edges: []
@@ -238,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0d1b1a5e7c12fd64f9c27f70613c9727
     internalID: 0
     vertices: []
     indices: 
@@ -246,13 +221,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Idle 1_0: -7050993540882883828
-      Idle 1_1: 760058600049143939
-      Idle 1_2: 794771719245926436
-      Idle 1_3: 1063925711475361242
-      Idle 1_4: -1837866293141573617
+      Bat_0: 8647823593821616703
+      Bat_1: 5681806813702538305
+      Bat_2: 697682191857345388
+      Bat_3: 6993031405965254486
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
