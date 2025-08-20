@@ -127,7 +127,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -184,10 +184,10 @@ TextureImporter:
       name: Shield powerup_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 290
-        width: 139
-        height: 185
+        x: 0
+        y: 256
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Shield powerup_1
       rect:
         serializedVersion: 2
-        x: 215
-        y: 289
-        width: 142
-        height: 187
+        x: 192
+        y: 256
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: Shield powerup_2
       rect:
         serializedVersion: 2
-        x: 403
-        y: 288
-        width: 146
-        height: 186
+        x: 384
+        y: 256
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,10 +250,10 @@ TextureImporter:
       name: Shield powerup_3
       rect:
         serializedVersion: 2
-        x: 598
-        y: 287
-        width: 144
-        height: 191
+        x: 576
+        y: 256
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,10 +272,10 @@ TextureImporter:
       name: Shield powerup_4
       rect:
         serializedVersion: 2
-        x: 20
-        y: 23
-        width: 148
-        height: 198
+        x: 0
+        y: 0
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -294,10 +294,10 @@ TextureImporter:
       name: Shield powerup_5
       rect:
         serializedVersion: 2
-        x: 212
-        y: 130
-        width: 123
-        height: 93
+        x: 192
+        y: 0
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +316,10 @@ TextureImporter:
       name: Shield powerup_6
       rect:
         serializedVersion: 2
-        x: 404
-        y: 130
-        width: 58
-        height: 84
+        x: 384
+        y: 0
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +338,10 @@ TextureImporter:
       name: Shield powerup_7
       rect:
         serializedVersion: 2
-        x: 461
-        y: 193
-        width: 15
-        height: 21
+        x: 576
+        y: 0
+        width: 192
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,446 +352,6 @@ TextureImporter:
       bones: []
       spriteID: a3193af88d87dd5d0800000000000000
       internalID: -3036137702259715782
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_8
-      rect:
-        serializedVersion: 2
-        x: 473
-        y: 174
-        width: 53
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 761fd821cd1b45f10800000000000000
-      internalID: 2257624871981674855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_9
-      rect:
-        serializedVersion: 2
-        x: 616
-        y: 155
-        width: 34
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c39673b76d4378580800000000000000
-      internalID: -8825026849014322884
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_10
-      rect:
-        serializedVersion: 2
-        x: 665
-        y: 174
-        width: 44
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 288ca3608bee99930800000000000000
-      internalID: 4150611005744531586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_11
-      rect:
-        serializedVersion: 2
-        x: 281
-        y: 62
-        width: 76
-        height: 115
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d445ea2348a999110800000000000000
-      internalID: 1268214662658151501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_12
-      rect:
-        serializedVersion: 2
-        x: 458
-        y: 176
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 20196a01c308ace80800000000000000
-      internalID: -8157566779562487550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_13
-      rect:
-        serializedVersion: 2
-        x: 650
-        y: 176
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e311850c446d7150800000000000000
-      internalID: 5871959766833632232
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_14
-      rect:
-        serializedVersion: 2
-        x: 475
-        y: 68
-        width: 74
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 123df4e3bee815650800000000000000
-      internalID: 6219909701389243169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_15
-      rect:
-        serializedVersion: 2
-        x: 620
-        y: 152
-        width: 9
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5417cd8f442cac9a0800000000000000
-      internalID: -6211939134515416763
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_16
-      rect:
-        serializedVersion: 2
-        x: 667
-        y: 103
-        width: 42
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 776277243a47f3ee0800000000000000
-      internalID: -1279175524606335369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_17
-      rect:
-        serializedVersion: 2
-        x: 711
-        y: 132
-        width: 30
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f440616de25bb6f90800000000000000
-      internalID: -6959269586406079409
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_18
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 71
-        width: 65
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1770ce91e034e7a10800000000000000
-      internalID: 1909037019895170929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_19
-      rect:
-        serializedVersion: 2
-        x: 277
-        y: 78
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a899651e1b433bf00800000000000000
-      internalID: 1131305869994531210
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_20
-      rect:
-        serializedVersion: 2
-        x: 403
-        y: 73
-        width: 63
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 79ae38a65dd16b590800000000000000
-      internalID: -7658901313844680041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_21
-      rect:
-        serializedVersion: 2
-        x: 469
-        y: 78
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 54ed18909c574cbf0800000000000000
-      internalID: -304989368445968827
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_22
-      rect:
-        serializedVersion: 2
-        x: 603
-        y: 73
-        width: 50
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 29b7af0142bc6a5a0800000000000000
-      internalID: -6510292855553361006
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_23
-      rect:
-        serializedVersion: 2
-        x: 700
-        y: 81
-        width: 32
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fdbf2bbb482976fd0800000000000000
-      internalID: -2348747581868016673
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_24
-      rect:
-        serializedVersion: 2
-        x: 275
-        y: 67
-        width: 7
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6ec253786da4c3ea0800000000000000
-      internalID: -5891751927255585562
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_25
-      rect:
-        serializedVersion: 2
-        x: 467
-        y: 67
-        width: 7
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e906f549c764e8b20800000000000000
-      internalID: 3138523491202982046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_26
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 36
-        width: 24
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: edd4413778e842b80800000000000000
-      internalID: -8420448690873545250
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield powerup_27
-      rect:
-        serializedVersion: 2
-        x: 290
-        y: 28
-        width: 35
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 71f1ed118d352ae40800000000000000
-      internalID: 5666183468663316247
       vertices: []
       indices: 
       edges: []
@@ -808,8 +368,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":192.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Shield powerup_0: -5679428629518605435
+      Shield powerup_1: 6313439790893794412
+      Shield powerup_2: -6124611295071131014
+      Shield powerup_3: -7801521941076794759
+      Shield powerup_4: 8979896352926594089
+      Shield powerup_5: 8242970035153480474
+      Shield powerup_6: 1632495346677074214
+      Shield powerup_7: -3036137702259715782
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

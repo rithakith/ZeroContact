@@ -16,4 +16,5 @@ internal class AnimationStrings
     internal static string powerup = "PowerUp";
     internal static string powerdown = "PowerDown";
     internal static string IsAlive = "isAlive";
+    internal static string attack = "Attack";
 }
