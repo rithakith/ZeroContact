@@ -114,6 +114,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -284,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_0: 6470203955103841559
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_1: -5668239035322438373
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_2: 840841128075452635
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_3: 394003992173734841
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_4: 4131531114943133178
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_5: 4181419457508336423
+      20250819_1713_Pixel Art Spikes_remix_01k31264r2epxtsvjrb49sz9cb-Photoroom_6: 628474640115925083
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
