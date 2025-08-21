@@ -1,60 +1,41 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Damage : MonoBehaviour
 {
-    Animator animator;
-    [SerializeField]
-    private float _maxHealth;
-
-    public float MaxHealth
-    {
-        get { return _maxHealth; }
-        set { _maxHealth = value; }
-    }
-
-    private float _health = 100;
-
-    public float Health
-    {
-        get { return _health; }
-        set
-        {
-            _health = value;
-
-            //If health drops below 0, character dies
-            if (_health <= 0)
-            {
-                IsAlive = false;
-            }
-        }
-    }
-
-    private bool _isAlive = true;
-
-    public bool IsAlive
-    {
-        get { return _isAlive; }
-        set
-        {
-            _isAlive = value;
-            animator.SetBool(AnimationStrings.IsAlive, value);
-        }
-    }
+    public int maxHealth = 100;
+    public int health;
+    public Slider healthBar; // Reference to a UI Slider for health display
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        health = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+    
+     public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthBar.value = health;
+        if (health <= 0)
+        {
+            // Die();
+            Destroy(gameObject);
+        }
     }
 }
