@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ladder
+  - Enemy
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -12,12 +14,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
+  - PlayerHitBox
+  - EnemyHitBox
+  - PopupDamageText
   - 
   - 
   - 
