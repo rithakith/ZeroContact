@@ -307,7 +307,19 @@ MonoBehaviour:
     m_ActionId: 12986485-3eaf-4273-be60-236dc0d1e016
     m_ActionName: 'Player/Shield[/Keyboard/enter,/Mouse/rightButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1528268777895840816}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnShieldAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cb975998-c391-4024-ad94-a5b084799241
     m_ActionName: 'Player/ShieldAttack[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -410,6 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+  healthBar: {fileID: 0}
 --- !u!1001 &6044800873433915882
 PrefabInstance:
   m_ObjectHideFlags: 0

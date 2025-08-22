@@ -20,7 +20,14 @@ public class EnemyDamage : MonoBehaviour
     private void ApplyDamage(GameObject player)
     {
         Damage playerHealth = player.GetComponent<Damage>();
-        if (playerHealth == null) return;
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        if (playerHealth == null || playerController == null) return;
+
+        if (playerController.IsShieldActive())
+        {
+            Debug.Log("Blocked by shield!");
+            return;
+        }
 
         if (instantKill)
         {
