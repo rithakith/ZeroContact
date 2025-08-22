@@ -442,7 +442,7 @@ public class MainMenuGenerator : EditorWindow
         buttonText.color = Color.white;
         buttonText.alignment = TextAlignmentOptions.Center;
         buttonText.fontStyle = FontStyles.Bold;
-        buttonText.enableWordWrapping = false;
+        buttonText.textWrappingMode = TextWrappingModes.NoWrap;
         buttonText.overflowMode = TextOverflowModes.Overflow;
         
         // Position text to fill button
