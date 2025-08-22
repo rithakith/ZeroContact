@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RollingSpikeController : MonoBehaviour
 {
+    private bool gameOver = false;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float rotationSpeed = 360f;
     [SerializeField] private float detectionRange = 5f;
@@ -31,8 +32,25 @@ public class RollingSpikeController : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        Damage.OnPlayerDeath += StopMoving;
+    }
+
+    void OnDisable()
+    {
+        Damage.OnPlayerDeath -= StopMoving;
+    }
+
+    void StopMoving()
+    {
+        gameOver = true;
+        rb.linearVelocity = Vector2.zero;
+    }
+
     private void Update()
     {
+        if (gameOver) return;
         // Check ground angle for slope
         UpdateGroundAngle();
 
@@ -71,6 +89,7 @@ public class RollingSpikeController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (gameOver) return;
         // Move along slope
         float moveDirection = movingRight ? 1f : -1f;
 

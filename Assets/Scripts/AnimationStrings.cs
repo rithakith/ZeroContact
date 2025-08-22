@@ -18,4 +18,5 @@ internal class AnimationStrings
     internal static string IsAlive = "isAlive";
     internal static string attack = "Attack";
     internal static string Death = "death";
+    internal static string EnemyDeath = "EnemyDeath";
 }

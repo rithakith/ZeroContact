@@ -7,6 +7,8 @@ TagManager:
   - Ladder
   - Enemy
   - Shield
+  - crystal
+  - HPCrystal
   layers:
   - Default
   - TransparentFX
