@@ -20,7 +20,14 @@ public class EnemyDamage : MonoBehaviour
     private void ApplyDamage(GameObject player)
     {
         Damage playerHealth = player.GetComponent<Damage>();
-        if (playerHealth == null) return;
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        if (playerHealth == null || playerController == null) return;
+
+        if (playerController.IsShieldActive())
+        {
+            Debug.Log("Blocked by shield!");
+            return;
+        }
 
         if (instantKill)
         {
@@ -65,29 +72,5 @@ public class EnemyDamage : MonoBehaviour
             ApplyDamage(collision.gameObject);
         }
     }
-    // public int damage = 10; // Amount of damage to apply
-    // private Damage playerHealth;
-    // // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
 
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-
-    // }
-
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Player"))
-    //     {
-    //         if (playerHealth == null)
-    //         {
-    //             playerHealth = collision.gameObject.GetComponent<Damage>();
-    //         }
-    //         playerHealth.TakeDamage(damage);
-    //     }
-    // }
 }
