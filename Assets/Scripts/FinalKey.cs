@@ -10,6 +10,8 @@ public class FinalKey : MonoBehaviour
     private bool playerNearby = false;
     public TMP_Text NeedMoreText;
 
+    public GameObject hint;
+
     private void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
@@ -48,13 +50,21 @@ public class FinalKey : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             playerNearby = true;
+            hint.SetActive(true);
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             playerNearby = false;
+            hint.SetActive(false);
+        }
+
     }
 
     private void HideNeedMore()
