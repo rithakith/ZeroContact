@@ -79,7 +79,7 @@ public class ControlsTutorialManager : MonoBehaviour
         new TutorialScreen
         {
             title = "BASIC MOVEMENT - JUMPING",
-            content = "Press UP to JUMP\n\nEssential for dodging ground attacks\nand navigating vertical obstacles.",
+            content = "Press Space to JUMP\n\nEssential for dodging ground attacks\nand navigating vertical obstacles.",
             hasDemo = true,
             demoType = DemoType.Jump,
             buttonText = "NEXT when ready"

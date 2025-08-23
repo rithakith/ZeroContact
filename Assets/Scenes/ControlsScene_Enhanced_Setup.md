@@ -50,7 +50,7 @@ The enhanced controls tutorial now features:
 |   PLAYER DEMO     |   INSTRUCTIONS       |
 |   (Left Panel)    |   (Right Panel)      |
 |                   |                      |
-|                   |  "Press UP to JUMP"  |
+|                   |  "Press Space to JUMP"  |
 |                   |                      |
 +-------------------+----------------------+
 |              [NEXT]                      |

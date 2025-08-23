@@ -25,7 +25,8 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         MoveLeftRight,
         ShieldDeflect,
         ShieldAbsorb,
-        ShieldBypass
+        ShieldBypass,
+        EnemyShowcase
     }
     
     [Header("UI References")]
@@ -52,6 +53,11 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     public GameObject enemyDemoPrefab;
     public Transform enemySpawnPoint;
     public Camera demoCamera;
+    
+    [Header("Enemy Prefabs")]
+    public GameObject spikePrefab;
+    public GameObject batPrefab;
+    public Transform[] enemyShowcaseSpawnPoints;
     
     [Header("Visual Styling")]
     public Color normalButtonColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
@@ -132,9 +138,9 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         new TutorialScreen
         {
             title = "ENEMY ATTACK PATTERNS",
-            content = "Every alien telegraphs their attack.\nWatch. Learn. React.\n\nPhysical = Heavy, slow swings\nFire = Glowing, area damage\nElectric = Sparking, chain strikes",
-            hasDemo = false,
-            demoType = DemoType.None,
+            content = "Every alien telegraphs their attack.\nWatch. Learn. React.\n\nSpikes = Physical damage, predictable patterns\nBats = Flying enemies, swooping attacks",
+            hasDemo = true,
+            demoType = DemoType.EnemyShowcase,
             buttonText = "CONTINUE"
         },
         new TutorialScreen
@@ -166,6 +172,12 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     {
         SetupUI();
         ShowScreen(0);
+        
+        // Ensure no button is selected by default to prevent Space key activation
+        if (UnityEngine.EventSystems.EventSystem.current != null)
+        {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+        }
     }
     
     void SetupUI()
@@ -174,12 +186,22 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         {
             nextButton.onClick.AddListener(NextScreen);
             SetButtonColors(nextButton, normalButtonColor, hoverButtonColor, pressedButtonColor);
+            
+            // Disable keyboard navigation on the button
+            Navigation nav = nextButton.navigation;
+            nav.mode = Navigation.Mode.None;
+            nextButton.navigation = nav;
         }
         
         if (backButton != null)
         {
             backButton.onClick.AddListener(PreviousScreen);
             SetButtonColors(backButton, normalButtonColor, hoverButtonColor, pressedButtonColor);
+            
+            // Disable keyboard navigation on the button
+            Navigation nav = backButton.navigation;
+            nav.mode = Navigation.Mode.None;
+            backButton.navigation = nav;
         }
         
         if (titleText != null) titleText.color = textColor;
@@ -337,8 +359,16 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         CleanupDemo();
         isDemoActive = true;
         
-        // Always spawn player for interactive mode
-        SpawnInteractivePlayer();
+        // Always spawn player for interactive mode (except for enemy showcase)
+        if (demoType != DemoType.EnemyShowcase)
+        {
+            SpawnInteractivePlayer();
+        }
+        else
+        {
+            // For enemy showcase, spawn enemies instead
+            SpawnEnemyShowcase();
+        }
     }
     
     // No toggle needed - always interactive
@@ -357,21 +387,48 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
                 playerInput.enabled = true;
             }
             
-            // Add instruction overlay
-            if (demoInstructionText != null)
-            {
-                string currentText = demoInstructionText.text;
-                if (!currentText.Contains("Use arrow keys"))
-                {
-                    demoInstructionText.text += "\n\nUse arrow keys or WASD to control";
-                }
-            }
+           
             
             // Focus camera on player
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
+        }
+    }
+    
+    void SpawnEnemyShowcase()
+    {
+        // Simple display of enemies
+        if (demoSpawnPoint != null)
+        {
+            // Spawn spike on the left
+            if (spikePrefab != null)
+            {
+                Vector3 spikePos = demoSpawnPoint.position + Vector3.left * 2;
+                GameObject spike = Instantiate(spikePrefab, spikePos, Quaternion.identity);
+                spike.name = "DemoSpike";
+                
+                // Scale up the spike to be more visible
+                spike.transform.localScale = Vector3.one * 3f; // 3x bigger
+            }
+            
+            // Spawn bat on the right
+            if (batPrefab != null)
+            {
+                Vector3 batPos = demoSpawnPoint.position + Vector3.right * 2 + Vector3.up * 1;
+                GameObject bat = Instantiate(batPrefab, batPos, Quaternion.identity);
+                bat.name = "DemoBat";
+                
+                // Scale up the bat to be more visible
+                bat.transform.localScale = Vector3.one * 3f; // 3x bigger
+            }
+        }
+        
+        // Focus camera on demo area
+        if (demoCamera != null && demoSpawnPoint != null)
+        {
+            demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
         }
     }
     
@@ -566,6 +623,16 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         {
             Destroy(currentDemoEnemy);
         }
+        
+        // Clean up any demo enemies
+        GameObject[] demoEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in demoEnemies)
+        {
+            if (enemy.name.StartsWith("Demo"))
+            {
+                Destroy(enemy);
+            }
+        }
     }
     
     public void NextScreen()
@@ -600,18 +667,10 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     
     void Update()
     {
-        // Only use Enter key for next, not Space (Space is for jumping)
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            NextScreen();
-        }
+        // No keyboard navigation for next/previous - only button clicks
+        // Removed Enter key navigation to avoid conflicts
         
-        // Back button with left arrow or backspace
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Backspace))
-        {
-            PreviousScreen();
-        }
-        
+        // Only Escape key returns to main menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");

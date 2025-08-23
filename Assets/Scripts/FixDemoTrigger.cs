@@ -170,7 +170,7 @@ public class FixDemoTrigger : EditorWindow
         if (manager.demoInstructionText != null)
         {
             manager.demoInstructionText.gameObject.SetActive(true);
-            manager.demoInstructionText.text = "Press UP to JUMP\n\nEssential for dodging ground attacks\nand navigating vertical obstacles.";
+            manager.demoInstructionText.text = "Press Space to JUMP\n\nEssential for dodging ground attacks\nand navigating vertical obstacles.";
         }
         
         // Update title
