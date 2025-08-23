@@ -639,7 +639,8 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     {
         if (currentScreenIndex == tutorialScreens.Length - 1)
         {
-            SceneManager.LoadScene("MainMenu");
+            // On last screen (BEGIN THE RESCUE), load the game scene
+            SceneManager.LoadScene("SampleScene");
         }
         else
         {

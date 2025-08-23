@@ -711,11 +711,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 1831040972}
   settingsButton: {fileID: 659998973}
+  controlsButton: {fileID: 0}
   quitButton: {fileID: 2068570544}
   gameSceneName: Game
   settingsSceneName: Settings
   buttonClickSound: {fileID: 0}
   backgroundMusic: {fileID: 0}
+  musicVolume: 0.5
+  loopMusic: 1
 --- !u!114 &865840201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,7 +1402,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 123339577
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bdfa926720788184eb23c0a9a71ec9ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

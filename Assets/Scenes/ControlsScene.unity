@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layer1: {fileID: 0}
-  layer2: {fileID: 507438602}
+  layer2: {fileID: 0}
   layer1Alpha: 1
   layer2Alpha: 0.8
 --- !u!1 &19808548
@@ -1947,6 +1947,9 @@ MonoBehaviour:
   enemyDemoPrefab: {fileID: 0}
   enemySpawnPoint: {fileID: 1203079933}
   demoCamera: {fileID: 1333693387}
+  spikePrefab: {fileID: 0}
+  batPrefab: {fileID: 0}
+  enemyShowcaseSpawnPoints: []
   normalButtonColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.8}
   hoverButtonColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.9}
   pressedButtonColor: {r: 0.1, g: 0.1, b: 0.1, a: 0.8}
@@ -2011,82 +2014,35 @@ MonoBehaviour:
     demoType: 2
     buttonText: NEXT when ready
   - title: ACTIVATING YOUR SHIELD
-    content: 'Your shield adapts to counter specific threats.
-
-      Wrong mode =
-      certain death.
+    content: 'Press Right Click / Enter to activate the shield
 
 
-      Learn each mode. Fast.'
-    hasDemo: 0
+      Your shield
+      adapts to counter specific threats.
+
+      Wrong mode = certain death.
+
+'
+    hasDemo: 1
     demoType: 0
     buttonText: LEARN SHIELD MODES
-  - title: 'SHIELD MODE: DEFLECT'
-    content: 'Press SPACE to DEFLECT
+  - title: 'SHIELD MODE: Attack'
+    content: 'Press Right Click / Enter to activate the shield
 
 
-      Reflects physical projectiles back at
-      enemies.
+      Your shield
+      can be your most lethal weapon
 
-      Perfect timing multiplies damage.'
+'
     hasDemo: 1
     demoType: 3
     buttonText: NEXT when mastered
-  - title: 'SHIELD MODE: ABSORB'
-    content: 'Hold SPACE to ABSORB
-
-
-      Neutralizes elemental attacks (fire, electricity).
-
-      Converts
-      absorbed energy for shield power.'
-    hasDemo: 1
-    demoType: 4
-    buttonText: NEXT when mastered
-  - title: 'SHIELD MODE: BYPASS'
-    content: 'Double-tap SPACE to BYPASS
-
-
-      Phase through unblockable attacks.
-
-      Drains
-      shield energy - use wisely.'
-    hasDemo: 1
-    demoType: 5
-    buttonText: NEXT when mastered
-  - title: ENEMY ATTACK PATTERNS
-    content: 'Every alien telegraphs their attack.
-
-      Watch. Learn. React.
-
-
-      Physical
-      = Heavy, slow swings
-
-      Fire = Glowing, area damage
-
-      Electric = Sparking,
-      chain strikes'
+  - title: ENEMIES
+    content: Looks may be deceiving. Even though they may be small they are very
+      dangerous
     hasDemo: 0
     demoType: 0
     buttonText: CONTINUE
-  - title: ELEMENTAL DUNGEONS AHEAD
-    content: 'Each dungeon amplifies specific attack types:
-
-
-      PHYSICAL ZONE:
-      Brutal melee combat
-
-      FIRE ZONE: Constant burning threats
-
-      ELECTRIC
-      ZONE: Lightning-fast strikes
-
-
-      Adapt or perish.'
-    hasDemo: 0
-    demoType: 0
-    buttonText: ALMOST READY
   - title: TIME TO MOVE
     content: 'Your friend is counting on you.
 
