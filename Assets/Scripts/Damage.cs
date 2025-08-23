@@ -12,6 +12,9 @@ public class Damage : MonoBehaviour
     public Slider healthBar; // Reference to a UI Slider for health display
 
     private Animator animator;
+    public AudioSource backgroundMusic;
+    public AudioSource audioSource;
+    public AudioClip deathClip, damageClip;
     public int crystalCount = 0;
     public TMP_Text crystalCountText;
     private EntityVFX entityVFX;
@@ -54,6 +57,7 @@ public class Damage : MonoBehaviour
 
         health -= damage;
         entityVFX.TriggerOnDamageVFX();
+        audioSource.PlayOneShot(damageClip);
         healthBar.value = health;
         if (health <= 0)
         {
@@ -67,32 +71,34 @@ public class Damage : MonoBehaviour
         isDead = true;
         animator.SetTrigger(AnimationStrings.Death);
         OnPlayerDeath?.Invoke();
-        playerController.enabled = false; // Disable player controls
+
+        // Stop background music
+        if (backgroundMusic != null)
+            backgroundMusic.Stop();
+
+        audioSource.PlayOneShot(deathClip);
+
         if (playerController != null)
         {
             playerController.enabled = false;
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             if (rb != null) rb.linearVelocity = Vector2.zero;
         }
-
-
-        // // Destroy after animation finishes
-        // float deathAnimLength = animator.GetCurrentAnimatorStateInfo(0).length;
-        // Destroy(gameObject, deathAnimLength);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //collectibles
         if (collision.CompareTag("crystal") && collision.gameObject.activeSelf)
         {
-            collision.gameObject.SetActive(false);
+
             crystalCount += 1;
             crystalCountText.text = crystalCount + "/40";
         }
         if (collision.CompareTag("HPCrystal"))
         {
-            collision.gameObject.SetActive(false);
+
             int healAmount = 20;
             health += healAmount;
 
