@@ -1,0 +1,185 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Collections;
+
+public class PlayerInputSimulator : MonoBehaviour
+{
+    private PlayerController playerController;
+    private Rigidbody2D rb;
+    private PlayerInput playerInput;
+    
+    [Header("Demo Settings")]
+    public float demoMoveDistance = 3f;
+    public float moveSpeed = 5f;
+    
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+        rb = GetComponent<Rigidbody2D>();
+        playerInput = GetComponent<PlayerInput>();
+        
+        // Disable actual player input during demo
+        if (playerInput != null)
+        {
+            playerInput.enabled = false;
+        }
+    }
+    
+    public void SimulateJump()
+    {
+        if (playerController != null)
+        {
+            // Create a simulated input context
+            var jumpAction = new InputAction("Jump", InputActionType.Button);
+            jumpAction.Enable();
+            jumpAction.performed += ctx => playerController.OnJump(ctx);
+            jumpAction.PerformInteraction();
+            jumpAction.Disable();
+        }
+    }
+    
+    public void SimulateMoveLeft(float duration)
+    {
+        StartCoroutine(MoveInDirection(Vector2.left, duration));
+    }
+    
+    public void SimulateMoveRight(float duration)
+    {
+        StartCoroutine(MoveInDirection(Vector2.right, duration));
+    }
+    
+    public void SimulateShieldActivate()
+    {
+        if (playerController != null)
+        {
+            var shieldAction = new InputAction("Shield", InputActionType.Button);
+            shieldAction.Enable();
+            shieldAction.started += ctx => playerController.OnShield(ctx);
+            shieldAction.PerformInteraction();
+            shieldAction.Disable();
+        }
+    }
+    
+    public void SimulateShieldDeactivate()
+    {
+        if (playerController != null)
+        {
+            var shieldAction = new InputAction("Shield", InputActionType.Button);
+            shieldAction.Enable();
+            shieldAction.canceled += ctx => playerController.OnShield(ctx);
+            shieldAction.PerformInteraction();
+            shieldAction.Disable();
+        }
+    }
+    
+    public void SimulateShieldAttack()
+    {
+        if (playerController != null)
+        {
+            var attackAction = new InputAction("ShieldAttack", InputActionType.Button);
+            attackAction.Enable();
+            attackAction.started += ctx => playerController.OnShieldAttack(ctx);
+            attackAction.PerformInteraction();
+            attackAction.Disable();
+        }
+    }
+    
+    IEnumerator MoveInDirection(Vector2 direction, float duration)
+    {
+        float elapsed = 0f;
+        
+        while (elapsed < duration)
+        {
+            if (playerController != null)
+            {
+                // Simulate movement input
+                var moveAction = new InputAction("Move", InputActionType.Value, "<Gamepad>/leftStick");
+                moveAction.Enable();
+                
+                // Create callback context with direction
+                var context = new InputAction.CallbackContext();
+                playerController.OnMove(new InputAction.CallbackContext());
+                
+                // Manually move the player
+                Vector2 moveVector = direction * moveSpeed * Time.deltaTime;
+                rb.MovePosition(rb.position + moveVector);
+                
+                // Update facing direction
+                if (direction.x > 0 && !playerController.IsFacingRight)
+                {
+                    FlipPlayer();
+                }
+                else if (direction.x < 0 && playerController.IsFacingRight)
+                {
+                    FlipPlayer();
+                }
+                
+                moveAction.Disable();
+            }
+            
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+    
+    void FlipPlayer()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+    
+    public IEnumerator DemoJumpSequence(int jumpCount = 3)
+    {
+        for (int i = 0; i < jumpCount; i++)
+        {
+            SimulateJump();
+            yield return new WaitForSeconds(1.5f);
+        }
+    }
+    
+    public IEnumerator DemoMoveSequence()
+    {
+        yield return StartCoroutine(MoveInDirection(Vector2.left, 1f));
+        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(MoveInDirection(Vector2.right, 2f));
+        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(MoveInDirection(Vector2.left, 1f));
+    }
+    
+    public IEnumerator DemoShieldDeflectSequence()
+    {
+        SimulateShieldActivate();
+        yield return new WaitForSeconds(0.5f);
+        SimulateShieldAttack();
+        yield return new WaitForSeconds(0.5f);
+        SimulateShieldDeactivate();
+        yield return new WaitForSeconds(0.5f);
+    }
+    
+    public IEnumerator DemoShieldAbsorbSequence()
+    {
+        SimulateShieldActivate();
+        yield return new WaitForSeconds(2f);
+        SimulateShieldDeactivate();
+        yield return new WaitForSeconds(0.5f);
+    }
+    
+    public IEnumerator DemoShieldBypassSequence()
+    {
+        SimulateShieldActivate();
+        yield return new WaitForSeconds(0.2f);
+        SimulateShieldActivate(); // Double tap
+        yield return new WaitForSeconds(1f);
+        SimulateShieldDeactivate();
+    }
+    
+    void OnDestroy()
+    {
+        // Re-enable player input when demo is done
+        if (playerInput != null)
+        {
+            playerInput.enabled = true;
+        }
+    }
+}

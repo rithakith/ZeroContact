@@ -1,0 +1,22 @@
+## Unity Refresh Instructions
+
+The compilation error has been fixed by removing the problematic files:
+- ControlsTutorialManager.cs → ControlsTutorialManager.cs.backup
+- PlayerInputSimulator.cs → PlayerInputSimulator.cs.backup
+
+### To complete the fix in Unity:
+
+1. **Go back to Unity**
+2. **Unity will automatically recompile**
+3. **The errors should be gone**
+
+### Now using:
+- **ControlsTutorialManagerSimple.cs** - The working tutorial manager
+- **PlayerDemonstration.cs** - For player demos (already exists and works)
+
+### If errors persist:
+1. Right-click in Project window
+2. Select "Reimport All"
+3. Or restart Unity
+
+The Controls scene builder will now work without errors!

@@ -5,11 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ladder
-  - Enemy
-  - Shield
-  - crystal
-  - HPCrystal
-  - FinalKey
+  - Ground
   layers:
   - Default
   - TransparentFX
