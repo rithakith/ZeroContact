@@ -9,6 +9,7 @@ TagManager:
   - Shield
   - crystal
   - HPCrystal
+  - FinalKey
   layers:
   - Default
   - TransparentFX

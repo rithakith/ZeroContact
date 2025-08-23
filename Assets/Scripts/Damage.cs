@@ -5,13 +5,14 @@ using TMPro;
 
 public class Damage : MonoBehaviour
 {
+    public static Damage Instance;
     public static event Action OnPlayerDeath;
     public int maxHealth = 100;
     public int health;
     public Slider healthBar; // Reference to a UI Slider for health display
 
     private Animator animator;
-    private int crystalCount = 0;
+    public int crystalCount = 0;
     public TMP_Text crystalCountText;
     private EntityVFX entityVFX;
     private PlayerController playerController;
@@ -21,6 +22,14 @@ public class Damage : MonoBehaviour
         animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         entityVFX = GetComponent<EntityVFX>();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // prevent duplicates
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
