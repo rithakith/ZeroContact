@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3189089871998779054}
   - component: {fileID: 5756413733539098365}
   - component: {fileID: 6309839054458046476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,5 +161,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDelay: 1.5
-  explosionRadius: 2
-  damage: 2
+  damage: 10
