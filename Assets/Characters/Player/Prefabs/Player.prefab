@@ -18,7 +18,8 @@ GameObject:
   - component: {fileID: 6613036175234155671}
   - component: {fileID: 6355390325003290354}
   - component: {fileID: 5725513632300118549}
-  m_Layer: 0
+  - component: {fileID: 1165394421636599955}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -307,7 +308,19 @@ MonoBehaviour:
     m_ActionId: 12986485-3eaf-4273-be60-236dc0d1e016
     m_ActionName: 'Player/Shield[/Keyboard/enter,/Mouse/rightButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1528268777895840816}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnShieldAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cb975998-c391-4024-ad94-a5b084799241
     m_ActionName: 'Player/ShieldAttack[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -403,12 +416,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7031666653799163}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ab8d4e5a1c4f947a1993612abfdd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
+  maxHealth: 100
+  health: 0
+  healthBar: {fileID: 0}
+  crystalCount: 0
+  crystalCountText: {fileID: 0}
+--- !u!114 &1165394421636599955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031666653799163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1d40928f0ee14408887208fb506f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamageVFXMat: {fileID: 2100000, guid: 033673c2b81b9194994e3094fd5affde, type: 2}
+  damageVFXDuration: 0.15
 --- !u!1001 &6044800873433915882
 PrefabInstance:
   m_ObjectHideFlags: 0

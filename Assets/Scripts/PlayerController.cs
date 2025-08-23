@@ -192,14 +192,26 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnShieldAttack(InputAction.CallbackContext context)
-{
-    if (context.started && shieldActive)
     {
-        shieldAnimator.SetTrigger(AnimationStrings.attack); 
-        shieldActive = true;
+        if (context.started && shieldActive)
+        {
+            shieldAnimator.SetTrigger(AnimationStrings.attack);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1.5f, LayerMask.GetMask("Enemy"));
+            foreach (Collider2D hit in hits)
+            {
+                EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
+                if (enemy != null)
+                {
+                    enemy.EnemyTakeDamage(10); // example damage
+                }
+            }
+            shieldActive = true;
+        }
     }
-}
+    public bool IsShieldActive()
+    {
+        return shieldActive;
+    }
+
 
 }
-
-    
