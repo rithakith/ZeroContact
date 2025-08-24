@@ -17,7 +17,7 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         public DemoType demoType;
         public string buttonText = "NEXT";
     }
-    
+
     public enum DemoType
     {
         None,
@@ -28,7 +28,7 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         ShieldBypass,
         EnemyShowcase
     }
-    
+
     [Header("UI References")]
     public GameObject screenContainer;
     public TextMeshProUGUI titleText;
@@ -39,26 +39,26 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     public TextMeshProUGUI backButtonText;
     public GameObject demoArea;
     public Image backgroundOverlay;
-    
+
     [Header("Demo Layout - Split Screen")]
     public GameObject leftPanel;
     public GameObject rightPanel;
     public TextMeshProUGUI demoInstructionText;
-    
+
     // No try it button needed - always interactive
-    
+
     [Header("Demo Elements")]
     public GameObject playerPrefab;
     public Transform demoSpawnPoint;
     public GameObject enemyDemoPrefab;
     public Transform enemySpawnPoint;
     public Camera demoCamera;
-    
+
     [Header("Enemy Prefabs")]
     public GameObject spikePrefab;
     public GameObject batPrefab;
     public Transform[] enemyShowcaseSpawnPoints;
-    
+
     [Header("Visual Styling")]
     public Color normalButtonColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
     public Color hoverButtonColor = new Color(0.3f, 0.3f, 0.3f, 0.9f);
@@ -67,13 +67,13 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     public Color textColor = Color.white;
     public float fadeSpeed = 2f;
     public float screenTransitionTime = 0.5f;
-    
+
     [Header("Tutorial Screens")]
     public TutorialScreen[] tutorialScreens = new TutorialScreen[]
     {
         new TutorialScreen
         {
-            title = "YOUR CHILDHOOD FRIEND HAS BEEN TAKEN",
+            title = "YOUR CRUSH HAS BEEN TAKEN",
             content = "Alien forces have abducted her.\nEvery moment we waste, she slips further away.\n\nYou must master the Zero Contact Shield\nto survive the alien dungeons ahead.\n\nFollow these instructions carefully.\nHer life depends on it.",
             hasDemo = false,
             demoType = DemoType.None,
@@ -82,26 +82,26 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         new TutorialScreen
         {
             title = "ZERO CONTACT SHIELD SYSTEM",
-            content = "This adaptive shield is your only defense\nagainst the alien threat.\n\nMaster it quickly.\nYour friend needs you.",
+            content = "This adaptive shield is your only defense\nagainst the alien threat.\n\nMaster it quickly.\nYour crush needs you.",
             hasDemo = false,
             demoType = DemoType.None,
             buttonText = "BEGIN TRAINING"
         },
         new TutorialScreen
         {
-            title = "BASIC MOVEMENT - JUMPING",
+            title = "JUMPING",
             content = "Press SPACE to JUMP\n\nEssential for dodging ground attacks\nand navigating vertical obstacles.",
             hasDemo = true,
             demoType = DemoType.Jump,
-            buttonText = "NEXT when ready"
+            buttonText = "NEXT"
         },
         new TutorialScreen
         {
-            title = "BASIC MOVEMENT - LEFT/RIGHT",
+            title = "LEFT/RIGHT",
             content = "Press LEFT or RIGHT to MOVE\n\nQuick positioning saves lives.\nStay mobile to survive.",
             hasDemo = true,
             demoType = DemoType.MoveLeftRight,
-            buttonText = "NEXT when ready"
+            buttonText = "NEXT"
         },
         new TutorialScreen
         {
@@ -113,19 +113,19 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         },
         new TutorialScreen
         {
-            title = "SHIELD MODE: DEFLECT",
-            content = "Press SPACE to DEFLECT\n\nReflects physical projectiles back at enemies.\nPerfect timing multiplies damage.",
+            title = "DEFEND",
+            content = "Press ENTER or hold Right Mouse Button to DEFEND\n\nDefends against enemies.\nPerfect timing multiplies damage.",
             hasDemo = true,
             demoType = DemoType.ShieldDeflect,
-            buttonText = "NEXT when mastered"
+            buttonText = "NEXT"
         },
         new TutorialScreen
         {
-            title = "SHIELD MODE: ABSORB",
-            content = "Hold SPACE to ABSORB\n\nNeutralizes elemental attacks (fire, electricity).\nConverts absorbed energy for shield power.",
+            title = "SHOCKWAVE",
+            content = "Hold E with ENTER to activate SHOCKWAVE\n\nAttacks enemies in range.",
             hasDemo = true,
             demoType = DemoType.ShieldAbsorb,
-            buttonText = "NEXT when mastered"
+            buttonText = "NEXT"
         },
         new TutorialScreen
         {
@@ -160,56 +160,56 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             buttonText = "BEGIN THE RESCUE"
         }
     };
-    
+
     private int currentScreenIndex = 0;
     private GameObject currentDemoPlayer;
     private GameObject currentDemoEnemy;
     private Coroutine demoCoroutine;
     private bool isDemoActive = false;
     private bool isInteractiveMode = true;  // Always interactive
-    
+
     void Start()
     {
         SetupUI();
         ShowScreen(0);
-        
+
         // Ensure no button is selected by default to prevent Space key activation
         if (UnityEngine.EventSystems.EventSystem.current != null)
         {
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
         }
     }
-    
+
     void SetupUI()
     {
         if (nextButton != null)
         {
             nextButton.onClick.AddListener(NextScreen);
             SetButtonColors(nextButton, normalButtonColor, hoverButtonColor, pressedButtonColor);
-            
+
             // Disable keyboard navigation on the button
             Navigation nav = nextButton.navigation;
             nav.mode = Navigation.Mode.None;
             nextButton.navigation = nav;
         }
-        
+
         if (backButton != null)
         {
             backButton.onClick.AddListener(PreviousScreen);
             SetButtonColors(backButton, normalButtonColor, hoverButtonColor, pressedButtonColor);
-            
+
             // Disable keyboard navigation on the button
             Navigation nav = backButton.navigation;
             nav.mode = Navigation.Mode.None;
             backButton.navigation = nav;
         }
-        
+
         if (titleText != null) titleText.color = textColor;
         if (contentText != null) contentText.color = textColor;
         if (buttonText != null) buttonText.color = textColor;
         if (backButtonText != null) backButtonText.color = textColor;
     }
-    
+
     void SetButtonColors(Button button, Color normal, Color highlighted, Color pressed)
     {
         ColorBlock colors = button.colors;
@@ -220,24 +220,24 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         colors.fadeDuration = 0.1f;
         button.colors = colors;
     }
-    
+
     void ShowScreen(int index)
     {
         if (index < 0 || index >= tutorialScreens.Length) return;
-        
+
         currentScreenIndex = index;
         TutorialScreen screen = tutorialScreens[index];
-        
+
         // Always interactive mode
         isInteractiveMode = true;
-        
+
         StartCoroutine(TransitionToScreen(screen));
     }
-    
+
     IEnumerator TransitionToScreen(TutorialScreen screen)
     {
         float elapsedTime = 0f;
-        
+
         // Fade out
         while (elapsedTime < screenTransitionTime / 2)
         {
@@ -246,9 +246,9 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         UpdateScreenContent(screen);
-        
+
         // Fade in
         elapsedTime = 0f;
         while (elapsedTime < screenTransitionTime / 2)
@@ -258,23 +258,23 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         SetUIAlpha(1f);
-        
+
         if (screen.hasDemo)
         {
             StartDemo(screen.demoType);
         }
     }
-    
+
     void UpdateScreenContent(TutorialScreen screen)
     {
         if (titleText != null)
             titleText.text = screen.title;
-            
+
         if (buttonText != null)
             buttonText.text = screen.buttonText;
-            
+
         // Handle different layouts for demo vs non-demo screens
         if (screen.hasDemo)
         {
@@ -282,7 +282,7 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             if (leftPanel != null) leftPanel.SetActive(true);
             if (rightPanel != null) rightPanel.SetActive(true);
             if (demoArea != null) demoArea.SetActive(true);
-            
+
             // Hide center content, show demo instruction
             if (contentText != null) contentText.gameObject.SetActive(false);
             if (demoInstructionText != null)
@@ -290,9 +290,9 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
                 demoInstructionText.gameObject.SetActive(true);
                 demoInstructionText.text = screen.content;
             }
-            
+
             // No try it button needed
-            
+
             // Enable demo camera
             if (demoCamera != null) demoCamera.gameObject.SetActive(true);
         }
@@ -302,7 +302,7 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             if (leftPanel != null) leftPanel.SetActive(false);
             if (rightPanel != null) rightPanel.SetActive(false);
             if (demoArea != null) demoArea.SetActive(false);
-            
+
             // Show center content
             if (contentText != null)
             {
@@ -310,14 +310,14 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
                 contentText.text = screen.content;
             }
             if (demoInstructionText != null) demoInstructionText.gameObject.SetActive(false);
-            
+
             // No try it button needed
-            
+
             // Disable demo camera
             if (demoCamera != null) demoCamera.gameObject.SetActive(false);
         }
     }
-    
+
     void SetUIAlpha(float alpha)
     {
         if (titleText != null)
@@ -326,21 +326,21 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             c.a = alpha;
             titleText.color = c;
         }
-        
+
         if (contentText != null)
         {
             Color c = contentText.color;
             c.a = alpha;
             contentText.color = c;
         }
-        
+
         if (buttonText != null)
         {
             Color c = buttonText.color;
             c.a = alpha;
             buttonText.color = c;
         }
-        
+
         if (demoInstructionText != null)
         {
             Color c = demoInstructionText.color;
@@ -348,47 +348,64 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             demoInstructionText.color = c;
         }
     }
-    
+
+    // void StartDemo(DemoType demoType)
+    // {
+    //     if (demoCoroutine != null)
+    //     {
+    //         StopCoroutine(demoCoroutine);
+    //     }
+
+    //     CleanupDemo();
+    //     isDemoActive = true;
+
+    //     // Always spawn player for interactive mode (except for enemy showcase)
+    //     if (demoType != DemoType.EnemyShowcase)
+    //     {
+    //         SpawnInteractivePlayer();
+    //     }
+    //     else
+    //     {
+    //         // For enemy showcase, spawn enemies instead
+    //         SpawnEnemyShowcase();
+    //     }
+    // }
     void StartDemo(DemoType demoType)
     {
-        if (demoCoroutine != null)
-        {
-            StopCoroutine(demoCoroutine);
-        }
-        
         CleanupDemo();
         isDemoActive = true;
-        
-        // Always spawn player for interactive mode (except for enemy showcase)
-        if (demoType != DemoType.EnemyShowcase)
+
+        if (demoType == DemoType.EnemyShowcase)
         {
-            SpawnInteractivePlayer();
+            // Only spawn enemies for showcase
+            SpawnEnemyShowcase();
         }
         else
         {
-            // For enemy showcase, spawn enemies instead
-            SpawnEnemyShowcase();
+            // Always spawn interactive player
+            SpawnInteractivePlayer();
         }
     }
-    
+
+
     // No toggle needed - always interactive
-    
+
     void SpawnInteractivePlayer()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "InteractivePlayer";
-            
+
             // Make sure player input is enabled
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
             if (playerInput != null)
             {
                 playerInput.enabled = true;
             }
-            
-           
-            
+
+
+
             // Focus camera on player
             if (demoCamera != null)
             {
@@ -396,7 +413,7 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             }
         }
     }
-    
+
     void SpawnEnemyShowcase()
     {
         // Simple display of enemies
@@ -408,30 +425,30 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
                 Vector3 spikePos = demoSpawnPoint.position + Vector3.left * 2;
                 GameObject spike = Instantiate(spikePrefab, spikePos, Quaternion.identity);
                 spike.name = "DemoSpike";
-                
+
                 // Scale up the spike to be more visible
                 spike.transform.localScale = Vector3.one * 3f; // 3x bigger
             }
-            
+
             // Spawn bat on the right
             if (batPrefab != null)
             {
                 Vector3 batPos = demoSpawnPoint.position + Vector3.right * 2 + Vector3.up * 1;
                 GameObject bat = Instantiate(batPrefab, batPos, Quaternion.identity);
                 bat.name = "DemoBat";
-                
+
                 // Scale up the bat to be more visible
                 bat.transform.localScale = Vector3.one * 3f; // 3x bigger
             }
         }
-        
+
         // Focus camera on demo area
         if (demoCamera != null && demoSpawnPoint != null)
         {
             demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
         }
     }
-    
+
     // Demo coroutines (automated)
     IEnumerator DemoJump()
     {
@@ -439,191 +456,171 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "DemoPlayer";
-            
+
             // Disable player input for demo
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
             if (playerInput != null)
             {
                 playerInput.enabled = false;
             }
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             // Focus camera
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (false)  // Never run automated demos
             {
-                if (demo != null)
-                {
-                    demo.DemoJump();
-                }
-                yield return new WaitForSeconds(2f);
             }
         }
+        yield break;
     }
-    
+
     IEnumerator DemoMove()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "DemoPlayer";
-            
+
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
             if (playerInput != null)
             {
                 playerInput.enabled = false;
             }
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (false)  // Never run automated demos
             {
-                if (demo != null)
-                {
-                    demo.DemoMoveLeftRight();
-                }
-                yield return new WaitForSeconds(4f);
             }
         }
+        yield break;
     }
-    
+
     IEnumerator DemoShieldDeflect()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "DemoPlayer";
-            
+
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
             if (playerInput != null)
             {
                 playerInput.enabled = false;
             }
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (false)  // Never run automated demos
             {
-                if (demo != null)
-                {
-                    demo.DemoShieldDeflect();
-                }
-                yield return new WaitForSeconds(3f);
             }
         }
+        yield break;
     }
-    
+
     IEnumerator DemoShieldAbsorb()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "DemoPlayer";
-            
+
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
             if (playerInput != null)
             {
                 playerInput.enabled = false;
             }
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (false)  // Never run automated demos
             {
-                if (demo != null)
-                {
-                    demo.DemoShieldAbsorb();
-                }
-                yield return new WaitForSeconds(3f);
             }
         }
+        yield break;
     }
-    
+
     IEnumerator DemoShieldBypass()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "DemoPlayer";
-            
+
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
             if (playerInput != null)
             {
                 playerInput.enabled = false;
             }
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (false)  // Never run automated demos
             {
-                if (demo != null)
-                {
-                    demo.DemoShieldBypass();
-                }
-                yield return new WaitForSeconds(3f);
             }
         }
+        yield break;
     }
-    
+
     void CleanupDemo()
     {
         isDemoActive = false;
-        
+
         if (currentDemoPlayer != null)
         {
             Destroy(currentDemoPlayer);
         }
-        
+
         if (currentDemoEnemy != null)
         {
             Destroy(currentDemoEnemy);
         }
-        
+
         // Clean up any demo enemies
         GameObject[] demoEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in demoEnemies)
@@ -634,19 +631,19 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             }
         }
     }
-    
+
     public void NextScreen()
     {
         if (currentScreenIndex == tutorialScreens.Length - 1)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MenuScreen");
         }
         else
         {
             ShowScreen(currentScreenIndex + 1);
         }
     }
-    
+
     public void PreviousScreen()
     {
         if (currentScreenIndex > 0)
@@ -656,24 +653,24 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         else
         {
             // On first screen, back button returns to main menu
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MenuScreen");
         }
     }
-    
+
     void OnDestroy()
     {
         CleanupDemo();
     }
-    
+
     void Update()
     {
         // No keyboard navigation for next/previous - only button clicks
         // Removed Enter key navigation to avoid conflicts
-        
+
         // Only Escape key returns to main menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MenuScreen");
         }
     }
 }

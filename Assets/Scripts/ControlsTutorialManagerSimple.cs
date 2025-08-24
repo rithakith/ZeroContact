@@ -17,7 +17,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
         public DemoType demoType;
         public string buttonText = "NEXT";
     }
-    
+
     public enum DemoType
     {
         None,
@@ -27,7 +27,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
         ShieldAbsorb,
         ShieldBypass
     }
-    
+
     [Header("UI References")]
     public GameObject screenContainer;
     public TextMeshProUGUI titleText;
@@ -38,19 +38,19 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
     public TextMeshProUGUI backButtonText;
     public GameObject demoArea;
     public Image backgroundOverlay;
-    
+
     [Header("Demo Layout - Split Screen")]
     public GameObject leftPanel;  // For player demo
     public GameObject rightPanel; // For instructions
     public TextMeshProUGUI demoInstructionText;
-    
+
     [Header("Demo Elements")]
     public GameObject playerPrefab; // Use actual Player prefab from game
     public Transform demoSpawnPoint;
     public GameObject enemyDemoPrefab;
     public Transform enemySpawnPoint;
     public Camera demoCamera; // Separate camera for demo area
-    
+
     [Header("Visual Styling")]
     public Color normalButtonColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
     public Color hoverButtonColor = new Color(0.3f, 0.3f, 0.3f, 0.9f);
@@ -58,7 +58,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
     public Color textColor = Color.white;
     public float fadeSpeed = 2f;
     public float screenTransitionTime = 0.5f;
-    
+
     [Header("Tutorial Screens")]
     public TutorialScreen[] tutorialScreens = new TutorialScreen[]
     {
@@ -80,19 +80,19 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
         },
         new TutorialScreen
         {
-            title = "BASIC MOVEMENT - JUMPING",
+            title = "JUMPING",
             content = "Press SPACE to JUMP\n\nEssential for dodging ground attacks\nand navigating vertical obstacles.",
             hasDemo = true,
             demoType = DemoType.Jump,
-            buttonText = "NEXT when ready"
+            buttonText = "NEXT"
         },
         new TutorialScreen
         {
-            title = "BASIC MOVEMENT - LEFT/RIGHT",
+            title = "MOVE LEFT/RIGHT",
             content = "Press LEFT or RIGHT to MOVE\n\nQuick positioning saves lives.\nStay mobile to survive.",
             hasDemo = true,
             demoType = DemoType.MoveLeftRight,
-            buttonText = "NEXT when ready"
+            buttonText = "NEXT"
         },
         new TutorialScreen
         {
@@ -104,43 +104,19 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
         },
         new TutorialScreen
         {
-            title = "SHIELD MODE: DEFLECT",
-            content = "Press SPACE to DEFLECT\n\nReflects physical projectiles back at enemies.\nPerfect timing multiplies damage.",
+            title = "DEFEND",
+            content = "Press ENTER or MOUSE RIGHT CLICK to DEFEND\n\nDefends against enemies.\nPerfect timing multiplies damage.",
             hasDemo = true,
             demoType = DemoType.ShieldDeflect,
             buttonText = "NEXT when mastered"
         },
         new TutorialScreen
         {
-            title = "SHIELD MODE: ABSORB",
-            content = "Hold SPACE to ABSORB\n\nNeutralizes elemental attacks (fire, electricity).\nConverts absorbed energy for shield power.",
+            title = "SHOCKWAVE",
+            content = "Hold E with ENTER to ABSORB\n\nNeutralizes elemental attacks (fire, electricity).\nConverts absorbed energy for shield power.",
             hasDemo = true,
             demoType = DemoType.ShieldAbsorb,
             buttonText = "NEXT when mastered"
-        },
-        new TutorialScreen
-        {
-            title = "SHIELD MODE: BYPASS",
-            content = "Double-tap SPACE to BYPASS\n\nPhase through unblockable attacks.\nDrains shield energy - use wisely.",
-            hasDemo = true,
-            demoType = DemoType.ShieldBypass,
-            buttonText = "NEXT when mastered"
-        },
-        new TutorialScreen
-        {
-            title = "ENEMY ATTACK PATTERNS",
-            content = "Every alien telegraphs their attack.\nWatch. Learn. React.\n\nPhysical = Heavy, slow swings\nFire = Glowing, area damage\nElectric = Sparking, chain strikes",
-            hasDemo = false,
-            demoType = DemoType.None,
-            buttonText = "CONTINUE"
-        },
-        new TutorialScreen
-        {
-            title = "ELEMENTAL DUNGEONS AHEAD",
-            content = "Each dungeon amplifies specific attack types:\n\nPHYSICAL ZONE: Brutal melee combat\nFIRE ZONE: Constant burning threats\nELECTRIC ZONE: Lightning-fast strikes\n\nAdapt or perish.",
-            hasDemo = false,
-            demoType = DemoType.None,
-            buttonText = "ALMOST READY"
         },
         new TutorialScreen
         {
@@ -151,25 +127,25 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             buttonText = "BEGIN THE RESCUE"
         }
     };
-    
+
     private int currentScreenIndex = 0;
     private GameObject currentDemoPlayer;
     private GameObject currentDemoEnemy;
     private Coroutine demoCoroutine;
     private bool isDemoActive = false;
-    
+
     void Start()
     {
         SetupUI();
         ShowScreen(0);
     }
-    
+
     void SetupUI()
     {
         if (nextButton != null)
         {
             nextButton.onClick.AddListener(NextScreen);
-            
+
             ColorBlock colors = nextButton.colors;
             colors.normalColor = normalButtonColor;
             colors.highlightedColor = hoverButtonColor;
@@ -178,11 +154,11 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             colors.fadeDuration = 0.1f;
             nextButton.colors = colors;
         }
-        
+
         if (backButton != null)
         {
             backButton.onClick.AddListener(PreviousScreen);
-            
+
             ColorBlock colors = backButton.colors;
             colors.normalColor = normalButtonColor;
             colors.highlightedColor = hoverButtonColor;
@@ -191,34 +167,34 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             colors.fadeDuration = 0.1f;
             backButton.colors = colors;
         }
-        
+
         if (titleText != null)
             titleText.color = textColor;
-        
+
         if (contentText != null)
             contentText.color = textColor;
-        
+
         if (buttonText != null)
             buttonText.color = textColor;
-        
+
         if (backButtonText != null)
             backButtonText.color = textColor;
     }
-    
+
     void ShowScreen(int index)
     {
         if (index < 0 || index >= tutorialScreens.Length) return;
-        
+
         currentScreenIndex = index;
         TutorialScreen screen = tutorialScreens[index];
-        
+
         StartCoroutine(TransitionToScreen(screen));
     }
-    
+
     IEnumerator TransitionToScreen(TutorialScreen screen)
     {
         float elapsedTime = 0f;
-        
+
         while (elapsedTime < screenTransitionTime / 2)
         {
             float alpha = Mathf.Lerp(1f, 0f, elapsedTime / (screenTransitionTime / 2));
@@ -226,9 +202,9 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         UpdateScreenContent(screen);
-        
+
         elapsedTime = 0f;
         while (elapsedTime < screenTransitionTime / 2)
         {
@@ -237,23 +213,23 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         SetUIAlpha(1f);
-        
+
         if (screen.hasDemo)
         {
             StartDemo(screen.demoType);
         }
     }
-    
+
     void UpdateScreenContent(TutorialScreen screen)
     {
         if (titleText != null)
             titleText.text = screen.title;
-            
+
         if (buttonText != null)
             buttonText.text = screen.buttonText;
-            
+
         // Handle different layouts for demo vs non-demo screens
         if (screen.hasDemo)
         {
@@ -261,7 +237,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             if (leftPanel != null) leftPanel.SetActive(true);
             if (rightPanel != null) rightPanel.SetActive(true);
             if (demoArea != null) demoArea.SetActive(true);
-            
+
             // Hide center content, show demo instruction
             if (contentText != null) contentText.gameObject.SetActive(false);
             if (demoInstructionText != null)
@@ -269,7 +245,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
                 demoInstructionText.gameObject.SetActive(true);
                 demoInstructionText.text = screen.content;
             }
-            
+
             // Enable demo camera
             if (demoCamera != null) demoCamera.gameObject.SetActive(true);
         }
@@ -279,7 +255,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             if (leftPanel != null) leftPanel.SetActive(false);
             if (rightPanel != null) rightPanel.SetActive(false);
             if (demoArea != null) demoArea.SetActive(false);
-            
+
             // Show center content
             if (contentText != null)
             {
@@ -287,12 +263,12 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
                 contentText.text = screen.content;
             }
             if (demoInstructionText != null) demoInstructionText.gameObject.SetActive(false);
-            
+
             // Disable demo camera
             if (demoCamera != null) demoCamera.gameObject.SetActive(false);
         }
     }
-    
+
     void SetUIAlpha(float alpha)
     {
         if (titleText != null)
@@ -301,21 +277,21 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             c.a = alpha;
             titleText.color = c;
         }
-        
+
         if (contentText != null)
         {
             Color c = contentText.color;
             c.a = alpha;
             contentText.color = c;
         }
-        
+
         if (buttonText != null)
         {
             Color c = buttonText.color;
             c.a = alpha;
             buttonText.color = c;
         }
-        
+
         if (demoInstructionText != null)
         {
             Color c = demoInstructionText.color;
@@ -323,17 +299,17 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             demoInstructionText.color = c;
         }
     }
-    
+
     void StartDemo(DemoType demoType)
     {
         if (demoCoroutine != null)
         {
             StopCoroutine(demoCoroutine);
         }
-        
+
         CleanupDemo();
         isDemoActive = true;
-        
+
         switch (demoType)
         {
             case DemoType.Jump:
@@ -353,27 +329,27 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
                 break;
         }
     }
-    
+
     IEnumerator DemoJump()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.transform.localScale = Vector3.one;
-            
+
             // Try to use PlayerDemonstration instead
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             // Focus demo camera on player
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (currentDemoPlayer != null && isDemoActive)
             {
                 if (demo != null)
@@ -384,26 +360,26 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             }
         }
     }
-    
+
     IEnumerator DemoMove()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.transform.localScale = Vector3.one;
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             // Focus demo camera on player
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             while (currentDemoPlayer != null && isDemoActive)
             {
                 if (demo != null)
@@ -414,31 +390,31 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             }
         }
     }
-    
+
     IEnumerator DemoShieldDeflect()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.transform.localScale = Vector3.one;
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             // Focus demo camera on player
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             if (enemyDemoPrefab != null && enemySpawnPoint != null)
             {
                 currentDemoEnemy = Instantiate(enemyDemoPrefab, enemySpawnPoint.position, Quaternion.identity);
             }
-            
+
             while (currentDemoPlayer != null && isDemoActive)
             {
                 if (demo != null)
@@ -449,31 +425,31 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             }
         }
     }
-    
+
     IEnumerator DemoShieldAbsorb()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.transform.localScale = Vector3.one;
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             // Focus demo camera on player
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             if (enemyDemoPrefab != null && enemySpawnPoint != null)
             {
                 currentDemoEnemy = Instantiate(enemyDemoPrefab, enemySpawnPoint.position, Quaternion.identity);
             }
-            
+
             while (currentDemoPlayer != null && isDemoActive)
             {
                 if (demo != null)
@@ -484,31 +460,31 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             }
         }
     }
-    
+
     IEnumerator DemoShieldBypass()
     {
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.transform.localScale = Vector3.one;
-            
+
             PlayerDemonstration demo = currentDemoPlayer.GetComponent<PlayerDemonstration>();
             if (demo == null)
             {
                 demo = currentDemoPlayer.AddComponent<PlayerDemonstration>();
             }
-            
+
             // Focus demo camera on player
             if (demoCamera != null)
             {
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
             }
-            
+
             if (enemyDemoPrefab != null && enemySpawnPoint != null)
             {
                 currentDemoEnemy = Instantiate(enemyDemoPrefab, enemySpawnPoint.position, Quaternion.identity);
             }
-            
+
             while (currentDemoPlayer != null && isDemoActive)
             {
                 if (demo != null)
@@ -519,22 +495,22 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             }
         }
     }
-    
+
     void CleanupDemo()
     {
         isDemoActive = false;
-        
+
         if (currentDemoPlayer != null)
         {
             Destroy(currentDemoPlayer);
         }
-        
+
         if (currentDemoEnemy != null)
         {
             Destroy(currentDemoEnemy);
         }
     }
-    
+
     public void NextScreen()
     {
         if (currentScreenIndex == tutorialScreens.Length - 1)
@@ -546,7 +522,7 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             ShowScreen(currentScreenIndex + 1);
         }
     }
-    
+
     public void PreviousScreen()
     {
         if (currentScreenIndex > 0)
@@ -559,12 +535,12 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
     }
-    
+
     void OnDestroy()
     {
         CleanupDemo();
     }
-    
+
     void Update()
     {
         // Only use Enter key for next, not Space (Space is for jumping)
@@ -572,13 +548,13 @@ public class ControlsTutorialManagerSimple : MonoBehaviour
         {
             NextScreen();
         }
-        
+
         // Back button with left arrow or backspace
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Backspace))
         {
             PreviousScreen();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
