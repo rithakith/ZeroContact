@@ -375,13 +375,13 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     void StartDemo(DemoType demoType)
     {
         Debug.Log($"StartDemo called with type: {demoType}");
-        
+
         // Only cleanup if switching to/from enemy showcase
         if (demoType == DemoType.EnemyShowcase || (isDemoActive && currentDemoPlayer == null))
         {
             CleanupDemo();
         }
-        
+
         isDemoActive = true;
 
         if (demoType == DemoType.EnemyShowcase)
@@ -415,27 +415,27 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     void SpawnInteractivePlayer()
     {
         Debug.Log($"SpawnInteractivePlayer called. PlayerPrefab: {playerPrefab != null}, DemoSpawnPoint: {demoSpawnPoint != null}");
-        
+
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "InteractivePlayer";
             Debug.Log($"Player spawned at position: {demoSpawnPoint.position}");
-            
+
             // Ensure player is on the correct layer
             int defaultLayer = LayerMask.NameToLayer("Default");
             if (defaultLayer != -1)
             {
                 currentDemoPlayer.layer = defaultLayer;
             }
-            
+
             // Check player's renderer
             Renderer playerRenderer = currentDemoPlayer.GetComponentInChildren<Renderer>();
             if (playerRenderer != null)
             {
                 Debug.Log($"Player renderer enabled: {playerRenderer.enabled}, Layer: {LayerMask.LayerToName(currentDemoPlayer.layer)}");
             }
-            
+
             SpriteRenderer playerSprite = currentDemoPlayer.GetComponentInChildren<SpriteRenderer>();
             if (playerSprite != null)
             {
@@ -458,15 +458,15 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
                     demoCamera.gameObject.SetActive(true);
                     Debug.Log("Demo camera was inactive, activating it");
                 }
-                
+
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
                 Debug.Log($"Demo camera positioned at: {demoCamera.transform.position}");
-                
+
                 // Set camera to render everything
                 demoCamera.cullingMask = -1;
                 demoCamera.clearFlags = CameraClearFlags.SolidColor;
                 demoCamera.backgroundColor = new Color(0.2f, 0.2f, 0.3f, 1f);
-                
+
                 // Ensure it's rendering on top
                 Camera mainCam = Camera.main;
                 if (mainCam != null && mainCam != demoCamera)
@@ -703,7 +703,7 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         catch (UnityException)
         {
             // Enemy tag doesn't exist - find demo enemies by name instead
-            GameObject[] allObjects = FindObjectsOfType<GameObject>();
+            GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
             foreach (GameObject obj in allObjects)
             {
                 if (obj.name.StartsWith("Demo") && (obj.name.Contains("Spike") || obj.name.Contains("Bat") || obj.name.Contains("Enemy")))
