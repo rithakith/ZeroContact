@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float airwalkSpeed = 3f;
     public float jumpImpulse = 10f;
     private Vector2 movement;
+    public AudioSource audioSource;
+    public AudioClip jumpClip, attackClip, shieldUpClip, shieldDownClip;
 
     TouchingDirections touchingDirections;
 
@@ -171,6 +173,7 @@ public class PlayerController : MonoBehaviour
         if (context.started && touchingDirections.IsGround)
         {
             animator.SetTrigger(AnimationStrings.jump);
+            audioSource.PlayOneShot(jumpClip);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
 
         }
@@ -182,11 +185,13 @@ public class PlayerController : MonoBehaviour
         if (context.started && !shieldActive)
         {
             shieldAnimator.SetTrigger(AnimationStrings.powerup);
+            audioSource.PlayOneShot(shieldUpClip);
             shieldActive = true;
         }
         else if (context.canceled && shieldActive)
         {
             shieldAnimator.SetTrigger(AnimationStrings.powerdown);
+            audioSource.PlayOneShot(shieldDownClip);
             shieldActive = false;
         }
     }
@@ -196,6 +201,7 @@ public class PlayerController : MonoBehaviour
         if (context.started && shieldActive)
         {
             shieldAnimator.SetTrigger(AnimationStrings.attack);
+            audioSource.PlayOneShot(attackClip);
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1.5f, LayerMask.GetMask("Enemy"));
             foreach (Collider2D hit in hits)
             {
