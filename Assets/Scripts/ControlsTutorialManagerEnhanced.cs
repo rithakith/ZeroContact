@@ -162,10 +162,10 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     };
 
     private int currentScreenIndex = 0;
-    private GameObject currentDemoPlayer;
+    public GameObject currentDemoPlayer { get; private set; }
     private GameObject currentDemoEnemy;
     private Coroutine demoCoroutine;
-    private bool isDemoActive = false;
+    public bool isDemoActive { get; private set; } = false;
     private bool isInteractiveMode = true;  // Always interactive
 
     void Start()
@@ -263,6 +263,8 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
 
         if (screen.hasDemo)
         {
+            // Add a small delay to ensure everything is set up
+            yield return new WaitForSeconds(0.1f);
             StartDemo(screen.demoType);
         }
     }
@@ -372,18 +374,38 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
     // }
     void StartDemo(DemoType demoType)
     {
-        CleanupDemo();
+        Debug.Log($"StartDemo called with type: {demoType}");
+        
+        // Only cleanup if switching to/from enemy showcase
+        if (demoType == DemoType.EnemyShowcase || (isDemoActive && currentDemoPlayer == null))
+        {
+            CleanupDemo();
+        }
+        
         isDemoActive = true;
 
         if (demoType == DemoType.EnemyShowcase)
         {
             // Only spawn enemies for showcase
+            CleanupDemo(); // Make sure to cleanup player for enemy showcase
             SpawnEnemyShowcase();
         }
         else
         {
-            // Always spawn interactive player
-            SpawnInteractivePlayer();
+            // Only spawn player if one doesn't exist
+            if (currentDemoPlayer == null)
+            {
+                SpawnInteractivePlayer();
+            }
+            else
+            {
+                Debug.Log("Reusing existing player for demo");
+                // Just make sure camera is positioned correctly
+                if (demoCamera != null && demoSpawnPoint != null)
+                {
+                    demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
+                }
+            }
         }
     }
 
@@ -392,10 +414,33 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
 
     void SpawnInteractivePlayer()
     {
+        Debug.Log($"SpawnInteractivePlayer called. PlayerPrefab: {playerPrefab != null}, DemoSpawnPoint: {demoSpawnPoint != null}");
+        
         if (playerPrefab != null && demoSpawnPoint != null)
         {
             currentDemoPlayer = Instantiate(playerPrefab, demoSpawnPoint.position, Quaternion.identity);
             currentDemoPlayer.name = "InteractivePlayer";
+            Debug.Log($"Player spawned at position: {demoSpawnPoint.position}");
+            
+            // Ensure player is on the correct layer
+            int defaultLayer = LayerMask.NameToLayer("Default");
+            if (defaultLayer != -1)
+            {
+                currentDemoPlayer.layer = defaultLayer;
+            }
+            
+            // Check player's renderer
+            Renderer playerRenderer = currentDemoPlayer.GetComponentInChildren<Renderer>();
+            if (playerRenderer != null)
+            {
+                Debug.Log($"Player renderer enabled: {playerRenderer.enabled}, Layer: {LayerMask.LayerToName(currentDemoPlayer.layer)}");
+            }
+            
+            SpriteRenderer playerSprite = currentDemoPlayer.GetComponentInChildren<SpriteRenderer>();
+            if (playerSprite != null)
+            {
+                Debug.Log($"Player sprite color: {playerSprite.color}, Sorting layer: {playerSprite.sortingLayerName}, Order: {playerSprite.sortingOrder}");
+            }
 
             // Make sure player input is enabled
             PlayerInput playerInput = currentDemoPlayer.GetComponent<PlayerInput>();
@@ -404,13 +449,35 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
                 playerInput.enabled = true;
             }
 
-
-
             // Focus camera on player
             if (demoCamera != null)
             {
+                // Ensure camera is active
+                if (!demoCamera.gameObject.activeInHierarchy)
+                {
+                    demoCamera.gameObject.SetActive(true);
+                    Debug.Log("Demo camera was inactive, activating it");
+                }
+                
                 demoCamera.transform.position = new Vector3(demoSpawnPoint.position.x, demoSpawnPoint.position.y, -10);
+                Debug.Log($"Demo camera positioned at: {demoCamera.transform.position}");
+                
+                // Set camera to render everything
+                demoCamera.cullingMask = -1;
+                demoCamera.clearFlags = CameraClearFlags.SolidColor;
+                demoCamera.backgroundColor = new Color(0.2f, 0.2f, 0.3f, 1f);
+                
+                // Ensure it's rendering on top
+                Camera mainCam = Camera.main;
+                if (mainCam != null && mainCam != demoCamera)
+                {
+                    demoCamera.depth = mainCam.depth + 10;
+                }
             }
+        }
+        else
+        {
+            Debug.LogError($"Failed to spawn player! PlayerPrefab null: {playerPrefab == null}, DemoSpawnPoint null: {demoSpawnPoint == null}");
         }
     }
 
@@ -621,13 +688,28 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
             Destroy(currentDemoEnemy);
         }
 
-        // Clean up any demo enemies
-        GameObject[] demoEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in demoEnemies)
+        // Clean up any demo enemies - use try/catch to handle missing tag
+        try
         {
-            if (enemy.name.StartsWith("Demo"))
+            GameObject[] demoEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in demoEnemies)
             {
-                Destroy(enemy);
+                if (enemy.name.StartsWith("Demo"))
+                {
+                    Destroy(enemy);
+                }
+            }
+        }
+        catch (UnityException)
+        {
+            // Enemy tag doesn't exist - find demo enemies by name instead
+            GameObject[] allObjects = FindObjectsOfType<GameObject>();
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name.StartsWith("Demo") && (obj.name.Contains("Spike") || obj.name.Contains("Bat") || obj.name.Contains("Enemy")))
+                {
+                    Destroy(obj);
+                }
             }
         }
     }
