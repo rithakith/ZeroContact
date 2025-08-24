@@ -94,7 +94,8 @@ public class Damage : MonoBehaviour
         {
 
             crystalCount += 1;
-            crystalCountText.text = crystalCount + "/40";
+            int displayCount = Mathf.Min(crystalCount, 40);
+            crystalCountText.text = displayCount + "/40";
         }
         if (collision.CompareTag("HPCrystal"))
         {
