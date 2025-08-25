@@ -6,11 +6,14 @@ public class ShroomExploder : MonoBehaviour
     public int damage = 10;
 
     private Animator animator;
+
+    private AudioSource audioSource;
     private bool exploding = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +29,7 @@ public class ShroomExploder : MonoBehaviour
     void Explode()
     {
         animator.SetTrigger("ExplodeNow");
+        audioSource.Play();
 
         // Damage player if inside the shroom's trigger
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 2f); // optional radius for extra safety

@@ -39,8 +39,17 @@ public class Damage : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = health;
+        
+        // Only update health bar if it exists (might not exist in tutorial scene)
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = health;
+        }
+        else
+        {
+            Debug.LogWarning("Health bar is not assigned for " + gameObject.name + ". This is normal in tutorial/demo scenes.");
+        }
     }
 
 
@@ -58,7 +67,12 @@ public class Damage : MonoBehaviour
         health -= damage;
         entityVFX.TriggerOnDamageVFX();
         audioSource.PlayOneShot(damageClip);
-        healthBar.value = health;
+        
+        // Update health bar if it exists
+        if (healthBar != null)
+        {
+            healthBar.value = health;
+        }
         if (health <= 0)
         {
             Die();
@@ -94,7 +108,8 @@ public class Damage : MonoBehaviour
         {
 
             crystalCount += 1;
-            crystalCountText.text = crystalCount + "/40";
+            int displayCount = Mathf.Min(crystalCount, 40);
+            crystalCountText.text = displayCount + "/40";
         }
         if (collision.CompareTag("HPCrystal"))
         {
@@ -105,7 +120,11 @@ public class Damage : MonoBehaviour
             if (health > maxHealth)
                 health = maxHealth;
 
-            healthBar.value = health;
+            // Update health bar if it exists
+            if (healthBar != null)
+            {
+                healthBar.value = health;
+            }
         }
     }
 }

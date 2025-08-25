@@ -5,12 +5,19 @@ public class FinalKey : MonoBehaviour
 {
     public GameObject victoryScreen;
     public GameObject needMoreUI;
+    private AudioSource audioSource;
+    public AudioSource backgroundMusic;
     public int requiredCrystals = 40;
 
     private bool playerNearby = false;
     public TMP_Text NeedMoreText;
 
     public GameObject hint;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -25,6 +32,10 @@ public class FinalKey : MonoBehaviour
             if (crystalCount >= requiredCrystals)
             {
                 victoryScreen.SetActive(true);
+                // Stop background music
+                if (backgroundMusic != null)
+                    backgroundMusic.Stop();
+                audioSource.Play();
                 Time.timeScale = 0f;
             }
             else
