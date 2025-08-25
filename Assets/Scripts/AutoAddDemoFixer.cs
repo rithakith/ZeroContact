@@ -17,22 +17,15 @@ public class AutoAddDemoFixer : MonoBehaviour
                 {
                     tutorialManager.AddComponent<ControlsDemoFixer>();
                     Debug.Log("Added ControlsDemoFixer to ControlsTutorialManager");
-                    
+
                     // Add emergency fix - this one will definitely run
                     tutorialManager.AddComponent<EmergencyDemoFix>();
                     Debug.Log("Added EmergencyDemoFix to ControlsTutorialManager");
-                    
-                    // Add light ray layering fix
-                    tutorialManager.AddComponent<FixLightRayLayering>();
-                    Debug.Log("Added FixLightRayLayering to ControlsTutorialManager");
-                    
-                    // Add canvas sorting order fix
-                    tutorialManager.AddComponent<FixCanvasSortingOrder>();
-                    Debug.Log("Added FixCanvasSortingOrder to ControlsTutorialManager");
-                    
-                    // Add background hiding fix
-                    tutorialManager.AddComponent<HideBackgroundDuringDemo>();
-                    Debug.Log("Added HideBackgroundDuringDemo to ControlsTutorialManager");
+
+                    // Remove these lines until the classes are created:
+                    // tutorialManager.AddComponent<FixLightRayLayering>();
+                    // tutorialManager.AddComponent<FixCanvasSortingOrder>();
+                    // tutorialManager.AddComponent<HideBackgroundDuringDemo>();
                 }
                 else
                 {
@@ -65,7 +58,7 @@ public static class RuntimeDemoFixerInitializer
                         tutorialManager.AddComponent<ControlsDemoFixer>();
                         Debug.Log("Added ControlsDemoFixer to scene via runtime initialization");
                     }
-                    
+
                     if (tutorialManager.GetComponent<EmergencyDemoFix>() == null)
                     {
                         tutorialManager.AddComponent<EmergencyDemoFix>();

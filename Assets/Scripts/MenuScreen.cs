@@ -26,4 +26,10 @@ public class MenuScreen : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("ControlsScene");
     }
+
+    public void GoToStory()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("CutScene");
+    }
 }

@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Player
+  - Enemy
   - Ladder
   - Ground
   layers:
@@ -19,7 +21,7 @@ TagManager:
   - PlayerHitBox
   - EnemyHitBox
   - PopupDamageText
-  - 
+  - Demo
   - 
   - 
   - 
@@ -48,6 +50,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Demo
+    uniqueID: 3705404015
     locked: 0
   m_RenderingLayers:
   - Default

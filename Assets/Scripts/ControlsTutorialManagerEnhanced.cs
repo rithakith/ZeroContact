@@ -129,14 +129,6 @@ public class ControlsTutorialManagerEnhanced : MonoBehaviour
         },
         new TutorialScreen
         {
-            title = "SHIELD MODE: BYPASS",
-            content = "Double-tap SPACE to BYPASS\n\nPhase through unblockable attacks.\nDrains shield energy - use wisely.",
-            hasDemo = true,
-            demoType = DemoType.ShieldBypass,
-            buttonText = "NEXT when mastered"
-        },
-        new TutorialScreen
-        {
             title = "ENEMY ATTACK PATTERNS",
             content = "Every alien telegraphs their attack.\nWatch. Learn. React.\n\nSpikes = Physical damage, predictable patterns\nBats = Flying enemies, swooping attacks",
             hasDemo = true,
