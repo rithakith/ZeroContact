@@ -44,5 +44,4 @@ We're a team of 3 passionate developers, artists, and designers building *Contac
 
 
 
-## 📂 Folder Structure
 
